@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 643px;
+            height: 585px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <h1 align="center"> Afghanistan Disinformation Report </h1>
+        <br>
+        <div id="map">
+        </div>
+
+        <div id="table">
+            <table>
+                <tr>
+                    <th>       </th>
+                    <th> Hirat </th>
+                    <th> Balkh </th>
+                    <th> Kabul </th>
+                    <th> Nangarhar </th>
+                    <th> Kandahar </th>
+                    <th> Khost </th>
+                </tr>
+                <tr>
+                    <td> <b> Interviewees </b></td>
+                    <td> 137 </td>
+                    <td> 110 </td>
+                    <td> 490 </td>
+                    <td> 110 </td>
+                    <td> 100 </td>
+                    <td> 50 </td>
+                </tr>
+                <tr>
+                    <td><b> Gender </b></td>
+                    <td>Females- 68<br> Males- 69</td>
+                    <td>Females- 55<br> Males- 55</td>
+                    <td>Females- 246<br> Males- 244</td>
+                    <td>Females- 54<br> Males- 56</td>
+                    <td>Females- 50<br> Males- 50</td>
+                    <td>Females- 25<br> Males- 25</td>
+                
+                </tr>
+                <tr>
+                    <td><b> Ethnicity</b></td>
+                    <td>Tajik - 53<br>Pashtun - 20<br>Hazara - 14<br>Arab - 4<br>Gujjar - 1<br>Sadat - 1<br>Turkmen - 1</td>
+                    <td>Tajik - 47<br>Pashtun - 31<br>Hazara - 12<br>Arab - 7<br>Turkmen - 7<br>Uzbek - 5<br>Qizilbash - 1</td>
+                    <td>Tajik - 278<br>Pashtun - 114<br>Hazara - 93<br>Sadat - 2 <br>Uzbek - 2</td>
+                    <td>Pashtun - 76<br>Pashai - 32<br>Arab - 1<br>Tajik - 1</td>
+                    <td>Pashtun - 96<br>Sadat - 3<br>Tajik - 1</td>
+                    <td>Pashtun - 50</td>
+                </tr>
+            </table>
+        </div>
+
+        <br>
+        <div id="plot">
+            <img src="images/Sources of Information.png">
+            <img src="images/Trustworthy Sources of Information.png">
+            <img src="images/Trustworthy Sources of Information by Gender.png">
+            <img src="images/Reach of Narratives.png">
+            <img src="images/Perception of Countries.png">
+            <img src="images/US intervention in Afghanistan.png">
+            <img src="images/Foreign Powers in Afghanistan.png">
+                
+        </div>
+            
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/AFG_adm0_0.js"></script>
+        <script src="data/AFG_adm1_1.js"></script>
+        <script src="data/ProvinceNames_2.js"></script>
+        <script src="data/Province_Highlights_3.js"></script>
+        <script src="data/Radio_4.js"></script>
+        <script src="data/TV_5.js"></script>
+        <script src="data/AfghanData_6.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        function pop_AFG_adm0_0(feature, layer) {
+        }
+
+        function style_AFG_adm0_0_0() {
+            return {
+                pane: 'pane_AFG_adm0_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(165,176,174,1.0)',
+            }
+        }
+        map.createPane('pane_AFG_adm0_0');
+        map.getPane('pane_AFG_adm0_0').style.zIndex = 400;
+        map.getPane('pane_AFG_adm0_0').style['mix-blend-mode'] = 'normal';
+        var layer_AFG_adm0_0 = new L.geoJson(json_AFG_adm0_0, {
+            attribution: '',
+            pane: 'pane_AFG_adm0_0',
+            onEachFeature: pop_AFG_adm0_0,
+            style: style_AFG_adm0_0_0,
+        });
+        bounds_group.addLayer(layer_AFG_adm0_0);
+        map.addLayer(layer_AFG_adm0_0);
+        function pop_AFG_adm1_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME_1'] !== null ? Autolinker.link(String(feature.properties['NAME_1'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_AFG_adm1_1_0() {
+            return {
+                pane: 'pane_AFG_adm1_1',
+                opacity: 1,
+                color: 'rgba(38,89,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(172,177,180,1.0)',
+            }
+        }
+        map.createPane('pane_AFG_adm1_1');
+        map.getPane('pane_AFG_adm1_1').style.zIndex = 401;
+        map.getPane('pane_AFG_adm1_1').style['mix-blend-mode'] = 'normal';
+        var layer_AFG_adm1_1 = new L.geoJson(json_AFG_adm1_1, {
+            attribution: '',
+            pane: 'pane_AFG_adm1_1',
+            onEachFeature: pop_AFG_adm1_1,
+            style: style_AFG_adm1_1_0,
+        });
+        bounds_group.addLayer(layer_AFG_adm1_1);
+        map.addLayer(layer_AFG_adm1_1);
+        function pop_ProvinceNames_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME_1'] !== null ? Autolinker.link(String(feature.properties['NAME_1'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ProvinceNames_2_0() {
+            return {
+                pane: 'pane_ProvinceNames_2',
+                opacity: 1,
+                color: 'rgba(16,16,16,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_ProvinceNames_2');
+        map.getPane('pane_ProvinceNames_2').style.zIndex = 402;
+        map.getPane('pane_ProvinceNames_2').style['mix-blend-mode'] = 'normal';
+        var layer_ProvinceNames_2 = new L.geoJson(json_ProvinceNames_2, {
+            attribution: '',
+            pane: 'pane_ProvinceNames_2',
+            onEachFeature: pop_ProvinceNames_2,
+            style: style_ProvinceNames_2_0,
+        });
+        bounds_group.addLayer(layer_ProvinceNames_2);
+        map.addLayer(layer_ProvinceNames_2);
+        function pop_Province_Highlights_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME_1'] !== null ? Autolinker.link(String(feature.properties['NAME_1'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Province_Highlights_3_0() {
+            return {
+                pane: 'pane_Province_Highlights_3',
+                opacity: 1,
+                color: 'rgba(16,16,16,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(77,136,204,1.0)',
+            }
+        }
+        map.createPane('pane_Province_Highlights_3');
+        map.getPane('pane_Province_Highlights_3').style.zIndex = 403;
+        map.getPane('pane_Province_Highlights_3').style['mix-blend-mode'] = 'normal';
+        var layer_Province_Highlights_3 = new L.geoJson(json_Province_Highlights_3, {
+            attribution: '',
+            pane: 'pane_Province_Highlights_3',
+            onEachFeature: pop_Province_Highlights_3,
+            style: style_Province_Highlights_3_0,
+        });
+        bounds_group.addLayer(layer_Province_Highlights_3);
+        map.addLayer(layer_Province_Highlights_3);
+        function pop_Radio_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NumRadio'] !== null ? Autolinker.link(String(feature.properties['NumRadio'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Radio_4_0() {
+            return {
+                pane: 'pane_Radio_4',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/radio-antenna.svg',
+            iconSize: [53.199999999999996, 53.199999999999996]
+        }),
+            }
+        }
+        map.createPane('pane_Radio_4');
+        map.getPane('pane_Radio_4').style.zIndex = 404;
+        map.getPane('pane_Radio_4').style['mix-blend-mode'] = 'normal';
+        var layer_Radio_4 = new L.geoJson(json_Radio_4, {
+            attribution: '',
+            pane: 'pane_Radio_4',
+            onEachFeature: pop_Radio_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_Radio_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Radio_4);
+        map.addLayer(layer_Radio_4);
+        function pop_TV_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NumTV'] !== null ? Autolinker.link(String(feature.properties['NumTV'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_TV_5_0() {
+            return {
+                pane: 'pane_TV_5',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/tv.svg',
+            iconSize: [45.599999999999994, 45.599999999999994]
+        }),
+            }
+        }
+        map.createPane('pane_TV_5');
+        map.getPane('pane_TV_5').style.zIndex = 405;
+        map.getPane('pane_TV_5').style['mix-blend-mode'] = 'normal';
+        var layer_TV_5 = new L.geoJson(json_TV_5, {
+            attribution: '',
+            pane: 'pane_TV_5',
+            onEachFeature: pop_TV_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_TV_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_TV_5);
+        map.addLayer(layer_TV_5);
+        function pop_AfghanData_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>District</strong><br />' + (feature.properties['A3. District'] !== null ? Autolinker.link(String(feature.properties['A3. District'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Gender</strong><br />' + (feature.properties['D1. Gender Respondent'] !== null ? Autolinker.link(String(feature.properties['D1. Gender Respondent'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Ethnicity</strong><br />' + (feature.properties['D2. What is your ethnic identity in the community?'] !== null ? Autolinker.link(String(feature.properties['D2. What is your ethnic identity in the community?'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Age</strong><br />' + (feature.properties['D3. Age'] !== null ? Autolinker.link(String(feature.properties['D3. Age'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_AfghanData_6_0() {
+            return {
+                pane: 'pane_AfghanData_6',
+                radius: 3.9999999999999987,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,186,194,1.0)',
+            }
+        }
+        map.createPane('pane_AfghanData_6');
+        map.getPane('pane_AfghanData_6').style.zIndex = 406;
+        map.getPane('pane_AfghanData_6').style['mix-blend-mode'] = 'normal';
+        var layer_AfghanData_6 = new L.geoJson(json_AfghanData_6, {
+            attribution: '',
+            pane: 'pane_AfghanData_6',
+            onEachFeature: pop_AfghanData_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_AfghanData_6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_AfghanData_6);
+        map.addLayer(layer_AfghanData_6);
+        map.on("zoomend", function(e) {
+            if (map.getZoom() <= 19 && map.getZoom() >= 8) {
+                map.addLayer(layer_ProvinceNames_2);
+            } else if (map.getZoom() > 19 || map.getZoom() < 8) {
+                map.removeLayer(layer_ProvinceNames_2);
+            }
+            if (map.getZoom() <= 19 && map.getZoom() >= 8) {
+                map.addLayer(layer_Radio_4);
+            } else if (map.getZoom() > 19 || map.getZoom() < 8) {
+                map.removeLayer(layer_Radio_4);
+            }
+            if (map.getZoom() <= 19 && map.getZoom() >= 8) {
+                map.addLayer(layer_TV_5);
+            } else if (map.getZoom() > 19 || map.getZoom() < 8) {
+                map.removeLayer(layer_TV_5);
+            }
+        });
+            if (map.getZoom() <= 19 && map.getZoom() >= 8) {
+                map.addLayer(layer_ProvinceNames_2);
+            } else if (map.getZoom() > 19 || map.getZoom() < 8) {
+                map.removeLayer(layer_ProvinceNames_2);
+            }
+            if (map.getZoom() <= 19 && map.getZoom() >= 8) {
+                map.addLayer(layer_Radio_4);
+            } else if (map.getZoom() > 19 || map.getZoom() < 8) {
+                map.removeLayer(layer_Radio_4);
+            }
+            if (map.getZoom() <= 19 && map.getZoom() >= 8) {
+                map.addLayer(layer_TV_5);
+            } else if (map.getZoom() > 19 || map.getZoom() < 8) {
+                map.removeLayer(layer_TV_5);
+            }
+        setBounds();
+        var i = 0;
+        layer_ProvinceNames_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['NAME_1'] !== null?String('<div style="color: #000000; font-size: 12pt; font-style: italic; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['NAME_1']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_ProvinceNames_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Radio_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['NumRadio'] !== null?String('<div style="color: #000000; font-size: 12pt; font-weight: bold; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['NumRadio']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Radio_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_TV_5.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['NumTV'] !== null?String('<div style="color: #000000; font-size: 12pt; font-weight: bold; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['NumTV']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_TV_5'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_ProvinceNames_2,layer_ProvinceHighlights_3,layer_Radio_4,layer_TV_5]);
+        map.on("zoomend", function(){
+            resetLabels([layer_ProvinceNames_2,layer_ProvinceHighlights_3,layer_Radio_4,layer_TV_5]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_ProvinceNames_2,layer_ProvinceHighlights_3,layer_Radio_4,layer_TV_5]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_ProvinceNames_2,layer_ProvinceHighlights_3,layer_Radio_4,layer_TV_5]);
+        });
+        </script>
+    </body>
+</html>
